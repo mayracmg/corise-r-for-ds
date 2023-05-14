@@ -39,6 +39,21 @@ tbl_names <- readr::read_csv(
 tbl_names
 ```
 
+    #> # A tibble: 2,052,781 × 4
+    #>     year name      sex   nb_births
+    #>    <dbl> <chr>     <chr>     <dbl>
+    #>  1  1880 Mary      F          7065
+    #>  2  1880 Anna      F          2604
+    #>  3  1880 Emma      F          2003
+    #>  4  1880 Elizabeth F          1939
+    #>  5  1880 Minnie    F          1746
+    #>  6  1880 Margaret  F          1578
+    #>  7  1880 Ida       F          1472
+    #>  8  1880 Alice     F          1414
+    #>  9  1880 Bertha    F          1320
+    #> 10  1880 Sarah     F          1288
+    #> # ℹ 2,052,771 more rows
+
 ### Question 1: \[Popular Names\] What are the most popular names?
 
 One of the first things we want to do is to understand naming trends.
@@ -72,6 +87,21 @@ tbl_names_popular = tbl_names |>
 
 tbl_names_popular
 ```
+
+    #> # A tibble: 10 × 3
+    #> # Groups:   sex [2]
+    #>    sex   name     nb_births
+    #>    <chr> <chr>        <dbl>
+    #>  1 F     Emma        193138
+    #>  2 F     Olivia      184966
+    #>  3 F     Sophia      173341
+    #>  4 F     Isabella    159570
+    #>  5 F     Ava         153414
+    #>  6 M     Noah        184977
+    #>  7 M     Liam        182646
+    #>  8 M     William     155326
+    #>  9 M     Mason       152944
+    #> 10 M     Jacob       150145
 
 #### Visualize
 
@@ -112,6 +142,8 @@ tbl_names_popular |>
     plot.title.position = 'plot'
   )
 ```
+
+<img src="img/question-1-visualize-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Question 2: \[Trendy Names\] What are trendy names?
 
@@ -167,6 +199,21 @@ tbl_names_popular_trendy = tbl_names |>
 tbl_names_popular_trendy
 ```
 
+    #> # A tibble: 10 × 5
+    #> # Groups:   sex [2]
+    #>    sex   name      nb_births_total nb_births_max trendiness
+    #>    <chr> <chr>               <dbl>         <dbl>      <dbl>
+    #>  1 F     Katina              11284          2745      0.243
+    #>  2 F     Ashanti             12141          2945      0.243
+    #>  3 F     Marquita            11010          2543      0.231
+    #>  4 F     Everleigh           12738          2814      0.221
+    #>  5 F     Miley               12865          2649      0.206
+    #>  6 M     Luka                14393          3197      0.222
+    #>  7 M     Atlas               11869          2523      0.213
+    #>  8 M     Jase                22062          4552      0.206
+    #>  9 M     Legend              16153          3152      0.195
+    #> 10 M     Jayceon             11606          2013      0.173
+
 |                                                                                                                                                                                                                                                                                                                                       |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Note**                                                                                                                                                                                                                                                                                                                              |
@@ -197,8 +244,15 @@ plot_trends_in_name <- function(my_name) {
     theme(plot.title.position = "plot")
 }
 plot_trends_in_name("Mayra")
+```
+
+<img src="img/question-2-visualize-1.png" width="100%" style="display: block; margin: auto;" />
+
+``` r
 plot_trends_in_name("Carolina")
 ```
+
+<img src="img/question-2-visualize-2.png" width="100%" style="display: block; margin: auto;" />
 
 ### Question 3: \[Exploring Letter Popularity\] What makes certain letters more popular in names?
 
@@ -233,6 +287,21 @@ tbl_names = tbl_names |>
 tbl_names
 ```
 
+    #> # A tibble: 2,052,781 × 6
+    #>     year name      sex   nb_births first_letter last_letter
+    #>    <dbl> <chr>     <chr>     <dbl> <chr>        <chr>      
+    #>  1  1880 Mary      F          7065 M            Y          
+    #>  2  1880 Anna      F          2604 A            A          
+    #>  3  1880 Emma      F          2003 E            A          
+    #>  4  1880 Elizabeth F          1939 E            H          
+    #>  5  1880 Minnie    F          1746 M            E          
+    #>  6  1880 Margaret  F          1578 M            T          
+    #>  7  1880 Ida       F          1472 I            A          
+    #>  8  1880 Alice     F          1414 A            E          
+    #>  9  1880 Bertha    F          1320 B            A          
+    #> 10  1880 Sarah     F          1288 S            H          
+    #> # ℹ 2,052,771 more rows
+
 Begin by computing the distribution of births across year and sex by
 first letter of a name.
 
@@ -249,6 +318,22 @@ tbl_names_by_letter = tbl_names |>
   
 tbl_names_by_letter
 ```
+
+    #> # A tibble: 7,313 × 5
+    #> # Groups:   year, sex [284]
+    #>     year sex   first_letter nb_births pct_births
+    #>    <dbl> <chr> <chr>            <dbl>      <dbl>
+    #>  1  1880 F     A                 9334     0.103 
+    #>  2  1880 F     B                 3876     0.0426
+    #>  3  1880 F     C                 5868     0.0645
+    #>  4  1880 F     D                 2218     0.0244
+    #>  5  1880 F     E                11444     0.126 
+    #>  6  1880 F     F                 2957     0.0325
+    #>  7  1880 F     G                 2463     0.0271
+    #>  8  1880 F     H                 2743     0.0301
+    #>  9  1880 F     I                 2480     0.0273
+    #> 10  1880 F     J                 3800     0.0418
+    #> # ℹ 7,303 more rows
 
 #### Visualize
 
@@ -284,6 +369,8 @@ tbl_names_by_letter |>
   )
 ```
 
+<img src="img/question-3-visualize-1-1.png" width="100%" style="display: block; margin: auto;" />
+
 Write a function that plot trends in the percentage of births for all
 names starting with a specific first letter.
 
@@ -312,6 +399,8 @@ plot_trends_in_letter <- function(my_letter) {
 
 plot_trends_in_letter("S")
 ```
+
+<img src="img/question-3-visualize-2-1.png" width="100%" style="display: block; margin: auto;" />
 
 |                                                                                                                                                                                                                                                                                         |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -348,6 +437,21 @@ tbl_names_by_first_and_last_letter = tbl_names |>
 tbl_names_by_first_and_last_letter
 ```
 
+    #> # A tibble: 43,579 × 5
+    #>    first_letter last_letter  year nb_births pct_births
+    #>    <chr>        <chr>       <dbl>     <dbl>      <dbl>
+    #>  1 A            A            1880      4784     0.0526
+    #>  2 A            A            1881      4966     0.0540
+    #>  3 A            A            1882      5728     0.0531
+    #>  4 A            A            1883      6051     0.0539
+    #>  5 A            A            1884      7038     0.0546
+    #>  6 A            A            1885      7203     0.0541
+    #>  7 A            A            1886      7785     0.0539
+    #>  8 A            A            1887      7814     0.0535
+    #>  9 A            A            1888      9444     0.0529
+    #> 10 A            A            1889      9365     0.0525
+    #> # ℹ 43,569 more rows
+
 #### Visualize
 
 Now, you will visualize the distribution of `pct_births` by
@@ -378,6 +482,8 @@ tbl_names_by_first_and_last_letter |>
     axis.ticks = element_blank()
   )
 ```
+
+<img src="img/question-4-visualize-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Question 5: \[Vowels vs Consonants\] Are there naming trends in usage of vowels and consonants?
 
@@ -428,6 +534,21 @@ tbl_names_vowel_consonant <- tbl_names |>
 tbl_names_vowel_consonant
 ```
 
+    #> # A tibble: 1,136 × 7
+    #>    sex    year first_letter_type last_letter_type nb_birth pct_births first_last
+    #>    <chr> <dbl> <chr>             <chr>               <dbl>      <dbl> <chr>     
+    #>  1 F      1880 consonant         consonant           19988     0.220  consonant…
+    #>  2 F      1880 consonant         vowel               46765     0.514  consonant…
+    #>  3 F      1880 vowel             consonant            5708     0.0627 vowelcons…
+    #>  4 F      1880 vowel             vowel               18533     0.204  vowelvowel
+    #>  5 F      1881 consonant         consonant           20069     0.218  consonant…
+    #>  6 F      1881 consonant         vowel               47287     0.514  consonant…
+    #>  7 F      1881 vowel             consonant            5669     0.0617 vowelcons…
+    #>  8 F      1881 vowel             vowel               18928     0.206  vowelvowel
+    #>  9 F      1882 consonant         consonant           23561     0.218  consonant…
+    #> 10 F      1882 consonant         vowel               55449     0.514  consonant…
+    #> # ℹ 1,126 more rows
+
 #### Visualize
 
 Now, you will create a visualization to display the trends in the usage
@@ -469,6 +590,8 @@ tbl_names_vowel_consonant |>
     legend.position = 'bottom'
   )
 ```
+
+<img src="img/question-5-visualize-1.png" width="100%" style="display: block; margin: auto;" />
 
 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
