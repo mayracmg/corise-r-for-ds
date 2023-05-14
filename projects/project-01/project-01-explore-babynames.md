@@ -36,6 +36,7 @@ tbl_names <- readr::read_csv(
 )
 
 # Print `tbl_names`
+tbl_names
 ```
 
 ### Question 1: \[Popular Names\] What are the most popular names?
